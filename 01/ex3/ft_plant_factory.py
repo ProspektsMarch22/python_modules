@@ -20,15 +20,15 @@ class Plant:
 
 
 def main() -> list:
-    plants_info = [
-        ["rose", 25, 30],
-        ["oak", 200, 365],
-        ["cactus", 5, 90],
-        ["sunflower", 80, 45],
-        ["fern", 15, 120]
+    plants_info: list[tuple[str, float, int]] = [
+        ("rose", 25, 30),
+        ("oak", 200, 365),
+        ("cactus", 5, 90),
+        ("sunflower", 80, 45),
+        ("fern", 15, 120)
     ]
     print("=== Plant Factory Output ===")
-    plants = []
+    plants = list[]
     for plant in plants_info:
         new_plant = Plant(plant[0], plant[1], plant[2])
         print(new_plant, end="")
