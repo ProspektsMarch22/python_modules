@@ -4,9 +4,9 @@ class Plant:
         self.height = height
         self.days = days
 
-    def show(self) -> None:
-        print(f"{self.name.capitalize()}: {"%.2f" % self.height}cm,", end="")
-        print(f" {self.days} days old")
+    def show(self) -> str:
+        return (f"{self.name}: {"%.2f" % self.height}cm,"
+                + f" {self.days} days old\n")
 
     def grow(self) -> None:
         self.height += (0.4 + (len(self.name)/10))
@@ -22,7 +22,7 @@ def main() -> None:
     print("=== Garden Plant Growth ===")
     for i in range(1, 8):
         print(f"=== Day {i} ===")
-        growth.show()
+        print(growth.show())
         growth.age()
     final = growth.height - start
     print(f"Growth this week: {"%.2f" % final}cm")
