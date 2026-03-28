@@ -32,15 +32,34 @@ class Flower(Plant):
             + f"{self.name} has not bloomed yet")
 
     def bloom(self) -> None:
-        print(f"[asking the {self.name} to bloom]")
+        print(f"[asking the {self.name.lower()} to bloom]")
         self.has_bloom = True
 
 
+class Tree(Plant):
+    def __init__(self, name: str, height: float, days: int, rad: float) -> None:
+        super().__init__(name, height, days)
+        self.diameter = rad * 2
+
+    def show_tree(self) -> str:
+        return (super().show()
+            + f" Trunk diameter: {self.diameter:.2f}cm")
+
+    def shade(self) -> None:
+        print(f"[asking the {self.name.lower()} to produce shade]")
+        print(f"Tree {self.name} now produces"
+              +f" a shade of {self.height}cm long and {self.diameter}cm wide")
+
 def main() -> None:
     flower = Flower("Rose", 15, 10, "red")
+    tree = Tree("oak", 200, 365, 2.5) 
+    print("=== Flower")
     print(flower.show_flower())
     flower.bloom()
     print(flower.show_flower())
+    print("\n=== Tree")
+    print(tree.show_tree())
+    tree.shade()
 
 if __name__ == '__main__':
     main()
