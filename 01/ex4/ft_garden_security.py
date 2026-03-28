@@ -38,7 +38,7 @@ class Plant:
         return (f"{self._name}: {self.get_height():.2f}cm,"
                 + f" {self.get_age()} days old\n")
 
-    def __str__(self) -> str:
+    def __str__(self) -> str: 
         return "Plant created: " + self.show()
 
 
