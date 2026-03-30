@@ -50,16 +50,42 @@ class Tree(Plant):
         print(f"Tree {self.name} now produces"
               +f" a shade of {self.height}cm long and {self.diameter}cm wide")
 
+
+class Vegetable(Plant):
+    def __init__(self, name: str, height: float, days: int, season: str,
+                 nvalue: int) -> None:
+        super().__init__(name, height, days)
+        self.season = season
+        self.nvalue = nvalue
+
+    def show_vegetable(self) -> str:
+        return (super().show()
+            + f" Harvest season: {self.season}\n"
+            + f" Nutritional value: {self.nvalue}")
+
+    def age_vegetable(self, time: int) -> None:
+        print(f"[make {self.name.lower()} grow and age for {time} days]")
+        for i in range(time):
+            super().age()
+            self.nvalue += 1
+
+
 def main() -> None:
+    print("=== Garden Plant Types ===")
     flower = Flower("Rose", 15, 10, "red")
-    tree = Tree("oak", 200, 365, 2.5) 
+    tree = Tree("oak", 200, 365, 2.5)
+    vegetable = Vegetable("tomato", 5, 10, "April", 0)
     print("=== Flower")
     print(flower.show_flower())
     flower.bloom()
-    print(flower.show_flower())
+    print(flower.show_flower(), end="")
     print("\n=== Tree")
     print(tree.show_tree())
     tree.shade()
+    print("\n=== Vegetable")
+    print(vegetable.show_vegetable())
+    vegetable.age_vegetable(20)
+    print(vegetable.show_vegetable())
 
 if __name__ == '__main__':
     main()
