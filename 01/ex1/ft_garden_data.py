@@ -10,7 +10,7 @@ class Plant:
               f"{self.age} days old")
 
 
-def main():
+def main() -> None:
     rose = Plant("rose", 25, 30)
     sunflower = Plant("sunflower", 80, 45)
     cactus = Plant("cactus", 15, 120)
