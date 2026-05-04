@@ -3,8 +3,6 @@ class Plant:
         self.name = name.capitalize()
         self.height = height
         self.days = age
-        print("Created: ", end="")
-        self.show()
 
     def show(self) -> None:
         print(f"{self.name}:",
@@ -21,16 +19,15 @@ class Plant:
 
 def main() -> None:
     print("=== Plant Factory Output ===")
-    plants = [
-        ["rose", 15.0, 30],
-        ["oak", 200.0, 365],
-        ["cactus", 5.0, 90],
-        ["sunflower", 80.0, 45],
-        ["fern", 15.0, 120]
-    ]
+    rose = Plant("rose", 15.0, 30)
+    oak = Plant("oak", 200.0, 365)
+    cactus = Plant("cactus", 5.0, 90)
+    sunflower = Plant("sunflower", 80.0, 45)
+    fern = Plant("fern", 15.0, 120)
+    plants = [rose, oak, cactus, sunflower, fern]
     for plant in plants:
-        name, height, age = plant[0], plant[1], plant[2]
-        Plant(name, height, age)
+        print("Created: ", end="")
+        plant.show()
 
 
 if __name__ == '__main__':
