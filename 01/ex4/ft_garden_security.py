@@ -41,6 +41,7 @@ class Plant:
 
 def main() -> None:
     print("=== Garden Security System ===")
+    # rose = Plant("rose")
     rose = Plant("rose", 15, 30)
     print("Plant created: ", end="")
     rose.show()
