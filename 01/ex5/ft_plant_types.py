@@ -57,7 +57,24 @@ class Flower(Plant):
         if self.has_bloom is True:
             print(f" {self.name} is blooming beautifully!")
         else:
-            print(f" {self.name} has not bloomed yet")
+            print(f" {self.name} has not bloomed yet.")
+
+
+class Tree(Plant):
+    def __init__(self, name: str, height: float, age: int,
+                 trunk_diameter: float) -> None:
+        super().__init__(name, height, age)
+        self.trunk_diameter = trunk_diameter
+
+    def produce_shade(self) -> None:
+        print(f"[asking the {self.name.lower()} to produce shade]")
+        print(f"Tree {self.name} now produces ",
+              f"a shade of {self.get_height()}cm long",
+              f" and {self.trunk_diameter}cm wide", sep="")
+
+    def show(self) -> None:
+        super().show()
+        print(f" Trunk diameter: {self.trunk_diameter}cm")
 
 
 def main() -> None:
@@ -67,6 +84,10 @@ def main() -> None:
     flower.show()
     flower.bloom()
     flower.show()
+    print("\n=== Tree")
+    tree = Tree("oak", 200.0, 365, 5.0)
+    tree.show()
+    tree.produce_shade()
 
 
 if __name__ == '__main__':
