@@ -130,16 +130,33 @@ class Tree(Plant):
                  trunk_diameter: float) -> None:
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
+        self._tracker: Tree._StatsTracker = self._StatsTracker()
 
     def produce_shade(self) -> None:
-        print(f"[asking the {self.name.lower()} to produce shade]")
         print(f"Tree {self.name} now produces ",
               f"a shade of {self.get_height()}cm long",
               f" and {self.trunk_diameter}cm wide", sep="")
+        self._tracker.increment_shade()
 
     def show(self) -> None:
         super().show()
         print(f" Trunk diameter: {self.trunk_diameter}cm")
+
+    def display_stats(self) -> None:
+        super().display_stats()
+        print(" ", self._tracker.count_shade, "shade")
+
+    class _StatsTracker(Plant._StatsTracker):
+        def __init__(self) -> None:
+            super().__init__()
+            self.__tracker_shade = 0
+
+        def increment_shade(self) -> None:
+            self.__tracker_shade += 1
+
+        @property
+        def count_shade(self):
+            return self.__tracker_shade
 
 
 class Vegetable(Plant):
@@ -172,6 +189,9 @@ def main() -> None:
     sunflower.show()
     sunflower.display_stats()
     moranguete.display_stats()
+    oak = Tree("oak", 200.0, 365, 20.0)
+    oak.produce_shade()
+    oak.display_stats()
 
 
 if __name__ == '__main__':
