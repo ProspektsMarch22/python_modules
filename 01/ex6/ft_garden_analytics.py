@@ -33,7 +33,7 @@ class Plant:
               f"{self.get_age()} days old")
 
     def grow(self) -> None:
-        self.set_height(self.get_height() + 0.8)
+        self.set_height(self.get_height() + 0.6)
 
     def age(self) -> None:
         self.set_age(self.get_age() + 1)
@@ -58,7 +58,6 @@ class Flower(Plant):
         self.has_bloom = False
 
     def bloom(self) -> None:
-        print(f"[asking the {self.name.lower()} to bloom]")
         self.has_bloom = True
 
     def show(self) -> None:
@@ -68,6 +67,22 @@ class Flower(Plant):
             print(f" {self.name} is blooming beautifully!")
         else:
             print(f" {self.name} has not bloomed yet.")
+
+
+class Seed(Flower):
+    def __init__(self, name: str, height: float, age: int,
+                 color: str) -> None:
+        super().__init__(name, height, age, color)
+        self.seeds = 0
+
+    def bloom(self) -> None:
+        super().bloom()
+        self.seeds += 42
+
+    def show(self) -> None:
+        super().show()
+        print(f" Seeds: {self.seeds}")
+
 
 
 class Tree(Plant):
@@ -109,6 +124,12 @@ def main() -> None:
     print(flower.older_than_year(flower.get_age()))
     moranguete = Plant.unknown_plant("moranguete")
     moranguete.show()
+    sunflower = Seed("sunflower", 80.0, 45, "yellow")
+    sunflower.show()
+    for i in range(20):
+        sunflower.age()
+    sunflower.bloom()
+    sunflower.show()
 
 
 if __name__ == '__main__':
