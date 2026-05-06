@@ -107,7 +107,7 @@ class Flower(Plant):
         if self.has_bloom is True:
             print(f" {self.name} is blooming beautifully!")
         else:
-            print(f" {self.name} has not bloomed yet.")
+            print(f" {self.name} has not bloomed yet")
 
 
 class Seed(Flower):
@@ -177,25 +177,43 @@ class Vegetable(Plant):
 
 
 def show_plant_stats(plant: Plant) -> None:
+    print(f"[statistics for {plant.name}]")
     plant.display_stats()
 
 
 def main() -> None:
-    flower = Flower("rose", 15.0, 30, "red")
-    print(flower.older_than_year(flower.get_age()))
-    moranguete = Plant.unknown_plant("moranguete")
-    moranguete.show()
+    # Testing code
+    print("=== Garden Statistics ===")
+    print("=== Check year-old")
+    print("Is 30 days more than a year? ->", Plant.older_than_year(30))
+    print("Is 400 days more than a year? ->", Plant.older_than_year(400))
+    print("\n=== Flower")
+    rose = Flower("rose", 15.0, 10, "red")
+    rose.show()
+    show_plant_stats(rose)
+    rose.bloom()
+    rose.grow()
+    rose.show()
+    show_plant_stats(rose)
+    print("\n=== Tree")
+    oak = Tree("oak", 200.0, 365, 5.0)
+    oak.show()
+    show_plant_stats(oak)
+    print("[asking the oak to produce shade]")
+    oak.produce_shade()
+    show_plant_stats(oak)
+    print("\n=== Seed")
     sunflower = Seed("sunflower", 80.0, 45, "yellow")
     sunflower.show()
-    for i in range(20):
-        sunflower.age()
+    print("[make sunflower grow, age and bloom")
+    sunflower.age()
     sunflower.bloom()
     sunflower.show()
-    sunflower.display_stats()
-    oak = Tree("oak", 200.0, 365, 20.0)
-    oak.produce_shade()
-    oak.display_stats()
-    show_plant_stats(moranguete)
+    show_plant_stats(sunflower)
+    print("\n=== Anonymous")
+    anon = Plant.unknown_plant("unknown plant")
+    anon.show()
+    show_plant_stats(anon)
 
 
 if __name__ == '__main__':
