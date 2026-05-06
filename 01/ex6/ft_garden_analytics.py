@@ -176,6 +176,10 @@ class Vegetable(Plant):
               f" Nutritional value: {self.nutritional_value}", sep="\n")
 
 
+def show_plant_stats(plant: Plant) -> None:
+    plant.display_stats()
+
+
 def main() -> None:
     flower = Flower("rose", 15.0, 30, "red")
     print(flower.older_than_year(flower.get_age()))
@@ -188,10 +192,10 @@ def main() -> None:
     sunflower.bloom()
     sunflower.show()
     sunflower.display_stats()
-    moranguete.display_stats()
     oak = Tree("oak", 200.0, 365, 20.0)
     oak.produce_shade()
     oak.display_stats()
+    show_plant_stats(moranguete)
 
 
 if __name__ == '__main__':
