@@ -1,9 +1,14 @@
+from __future__ import annotations
+from typing import Self
+
+
 # Parent Class
 class Plant:
     def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name.capitalize()
         self.set_height(height)
         self.set_age(age)
+        self._tracker = self._StatsTracker()
 
     # Setters and Getters
     def set_height(self, new_height: float) -> None:
@@ -31,13 +36,21 @@ class Plant:
         print(f"{self.name}:",
               f"{round(self.get_height(), 1)}cm,",
               f"{self.get_age()} days old")
+        self._tracker.increment_show()
 
     def grow(self) -> None:
         self.set_height(self.get_height() + 0.6)
+        self._tracker.increment_grow()
 
     def age(self) -> None:
         self.set_age(self.get_age() + 1)
         self.grow()
+        self._tracker.increment_age()
+
+    def display_stats(self) -> None:
+        print("Stats:", self._tracker.count_grow, "grow,",
+              self._tracker.count_age, "age,",
+              self._tracker.count_show, "show")
 
     # Static methods
     @staticmethod
@@ -46,8 +59,36 @@ class Plant:
 
     # Class method for unknown plant creation
     @classmethod
-    def unknown_plant(cls, name) -> object:
+    def unknown_plant(cls, name) -> Self:
         return cls(name, 0, 0)
+
+    # Inner Stats Class encapsulated
+    class _StatsTracker:
+        def __init__(self) -> None:
+            self.__tracker_grow: int = 0
+            self.__tracker_age: int = 0
+            self.__tracker_show: int = 0
+
+        def increment_grow(self) -> None:
+            self.__tracker_grow += 1
+
+        def increment_age(self) -> None:
+            self.__tracker_age += 1
+
+        def increment_show(self) -> None:
+            self.__tracker_show += 1
+
+        @property
+        def count_grow(self) -> int:
+            return self.__tracker_grow
+
+        @property
+        def count_age(self) -> int:
+            return self.__tracker_age
+
+        @property
+        def count_show(self) -> int:
+            return self.__tracker_show
 
 
 # Child classes
@@ -82,7 +123,6 @@ class Seed(Flower):
     def show(self) -> None:
         super().show()
         print(f" Seeds: {self.seeds}")
-
 
 
 class Tree(Plant):
@@ -130,6 +170,8 @@ def main() -> None:
         sunflower.age()
     sunflower.bloom()
     sunflower.show()
+    sunflower.display_stats()
+    moranguete.display_stats()
 
 
 if __name__ == '__main__':
