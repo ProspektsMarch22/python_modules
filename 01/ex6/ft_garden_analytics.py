@@ -26,7 +26,7 @@ class Plant:
     def get_age(self) -> int:
         return self._age
 
-    # Class methods
+    # General methods
     def show(self) -> None:
         print(f"{self.name}:",
               f"{round(self.get_height(), 1)}cm,",
@@ -38,6 +38,11 @@ class Plant:
     def age(self) -> None:
         self.set_age(self.get_age() + 1)
         self.grow()
+
+    # Static methods
+    @staticmethod
+    def older_than_year(age: int) -> bool:
+        return age > 365
 
 
 # Child classes
@@ -92,3 +97,12 @@ class Vegetable(Plant):
         super().show()
         print(f" Harvest season: {self.harvest_season}",
               f" Nutritional value: {self.nutritional_value}", sep="\n")
+
+
+def main() -> None:
+    flower = Flower("rose", 15.0, 30, "red")
+    print(flower.older_than_year(flower.get_age()))
+
+
+if __name__ == '__main__':
+    main()
