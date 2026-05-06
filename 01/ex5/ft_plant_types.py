@@ -29,7 +29,7 @@ class Plant:
     # Class methods
     def show(self) -> None:
         print(f"{self.name}:",
-              f"{self.get_height()}cm,",
+              f"{round(self.get_height(), 1)}cm,",
               f"{self.get_age()} days old")
 
     def grow(self) -> None:
@@ -77,6 +77,23 @@ class Tree(Plant):
         print(f" Trunk diameter: {self.trunk_diameter}cm")
 
 
+class Vegetable(Plant):
+    def __init__(self, name: str, height: float, age: int,
+                 harvest_season: str) -> None:
+        super().__init__(name, height, age)
+        self.harvest_season = harvest_season
+        self.nutritional_value: int = 0
+
+    def grow(self) -> None:
+        super().grow()
+        self.nutritional_value += 1
+
+    def show(self) -> None:
+        super().show()
+        print(f" Harvest season: {self.harvest_season}",
+              f" Nutritional value: {self.nutritional_value}", sep="\n")
+
+
 def main() -> None:
     print("=== Garden Plant Types ===")
     print("=== Flower")
@@ -88,6 +105,13 @@ def main() -> None:
     tree = Tree("oak", 200.0, 365, 5.0)
     tree.show()
     tree.produce_shade()
+    print("\n=== Vegetable")
+    veg = Vegetable("tomato", 5.0, 10, "April")
+    veg.show()
+    print("[make tomato grow and age for 20 days]")
+    for i in range(20):
+        veg.age()
+    veg.show()
 
 
 if __name__ == '__main__':
