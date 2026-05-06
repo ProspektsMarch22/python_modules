@@ -1,6 +1,6 @@
 # Parent Class
 class Plant:
-    def __init__(self, name: str, height: float = 0, age: int = 0) -> None:
+    def __init__(self, name: str, height: float, age: int) -> None:
         self.name = name.capitalize()
         self.set_height(height)
         self.set_age(age)
@@ -43,6 +43,11 @@ class Plant:
     @staticmethod
     def older_than_year(age: int) -> bool:
         return age > 365
+
+    # Class method for unknown plant creation
+    @classmethod
+    def unknown_plant(cls, name) -> object:
+        return cls(name, 0, 0)
 
 
 # Child classes
@@ -102,6 +107,8 @@ class Vegetable(Plant):
 def main() -> None:
     flower = Flower("rose", 15.0, 30, "red")
     print(flower.older_than_year(flower.get_age()))
+    moranguete = Plant.unknown_plant("moranguete")
+    moranguete.show()
 
 
 if __name__ == '__main__':
