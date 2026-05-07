@@ -1,7 +1,3 @@
-from __future__ import annotations
-from typing import Self
-
-
 # Parent Class
 class Plant:
     def __init__(self, name: str, height: float, age: int) -> None:
@@ -59,7 +55,7 @@ class Plant:
 
     # Class method for unknown plant creation
     @classmethod
-    def unknown_plant(cls, name) -> Self:
+    def unknown_plant(cls, name) -> 'Plant':
         return cls(name, 0, 0)
 
     # Inner Stats Class encapsulated
