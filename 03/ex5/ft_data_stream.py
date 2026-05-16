@@ -16,9 +16,10 @@ def gen_event() -> tp.Generator[tuple[str, str], None, None]:
 
 def consume_event(events: list[tuple[str, str]]
                   ) -> tp.Generator[tuple[str, str], None, None]:
-    chosen: tuple[str, str] = rd.choice(events)
-    events.remove(chosen)
-    yield chosen
+    while len(events) > 0:
+        chosen: tuple[str, str] = rd.choice(events)
+        events.remove(chosen)
+        yield chosen
 
 
 def main() -> None:
@@ -28,13 +29,11 @@ def main() -> None:
         print(f"Event {i}: Player {event[0]} did action {event[1]}")
     events: list[tuple[str, str]] = list()
     for _ in range(10):
-        events.append(next(gen_event()))
+        events += [next(gen_event())]
     print("Built list of 10 events:", events)
-    while len(events) > 0:
-        print("Got event from the list:",
-              next(consume_event(events)))
-        print("Remains in list:",
-              events)
+    for event in consume_event(events):
+        print("Got event from the list:", event)
+        print("Remains in list:", events)
 
 
 if __name__ == '__main__':
