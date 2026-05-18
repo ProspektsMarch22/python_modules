@@ -1,6 +1,6 @@
 #!/bin/usr/env python3
 
-from sys import argv
+from sys import argv, stdin, stderr
 from typing import IO
 
 
@@ -18,7 +18,7 @@ def display_file_data() -> None:
             f = open(file)
             content = f.read()
         except OSError as e:
-            print(f"Error opening file '{file}':", e)
+            print(f"[STDERR] Error opening file '{file}':", e, file=stderr)
         else:
             print("-" * 3, end="\n\n")
             print(content)
@@ -36,7 +36,8 @@ def display_file_data() -> None:
                 lines[i] = lines[i] + "#\n"
                 print(lines[i], end="")
             print("\n" + "-" * 3)
-            new_file: str = input("Enter new file name (or empty): ")
+            print("Enter new file namr (or empty): ", end="", flush=True)
+            new_file: str = stdin.readline().rstrip("\n")
             if (len(new_file) > 0):
                 print(f"Saving data to '{new_file}'")
                 n_f: IO[str] | None = None
@@ -46,7 +47,8 @@ def display_file_data() -> None:
                         n_f.write(line)
                     print(f"Data saved in file '{new_file}'")
                 except OSError as e:
-                    print(f"Error writing to file '{file}':", e)
+                    print(f"[STDERR] Error writing to file '{new_file}':",
+                          e, file=stderr)
                     print("Data not saved.")
                 finally:
                     if n_f is not None:
