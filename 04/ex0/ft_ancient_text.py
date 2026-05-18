@@ -11,8 +11,8 @@ def display_file_data() -> None:
         return
     print("=== Cyber Archives Recovery ===")
     for file in file_names:
+        f: IO[str] | None = None
         try:
-            f: IO[str] | None = None
             print(f"Accessing file '{file}'")
             f = open(file)
             content: str = f.read()
