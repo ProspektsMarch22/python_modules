@@ -39,10 +39,17 @@ def display_file_data() -> None:
             new_file: str = input("Enter new file name (or empty): ")
             if (len(new_file) > 0):
                 print(f"Saving data to '{new_file}'")
-                n_f: IO[str] = open(new_file, "w")
-                for line in lines:
-                    n_f.write(line)
-                print(f"Data saved in file '{new_file}'")
+                n_f: IO[str] | None = None
+                try:
+                    n_f = open(new_file, "w")
+                    for line in lines:
+                        n_f.write(line)
+                    print(f"Data saved in file '{new_file}'")
+                except OSError as e:
+                    print(f"Error writing to file '{file}':", e)
+                finally:
+                    if n_f is not None:
+                        n_f.close()
             else:
                 print("Not saving data.")
 
