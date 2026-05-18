@@ -11,11 +11,12 @@ def display_file_data() -> None:
         return
     print("=== Cyber Archives Recovery & Preservation ===")
     for file in file_names:
+        content: str | None = None
+        f: IO[str] | None = None
         try:
-            f: IO[str] | None = None
             print(f"Accessing file '{file}'")
             f = open(file)
-            content: str = f.read()
+            content = f.read()
         except OSError as e:
             print(f"Error opening file '{file}':", e)
         else:
@@ -26,7 +27,7 @@ def display_file_data() -> None:
             if f is not None:
                 f.close()
                 print(f"File '{file}' closed.")
-        if len(content) > 0:
+        if content is not None and len(content) > 0:
             print("\nTransform data:")
             print("-" * 3, end="\n\n")
             lines: list[str] = content.split("\n")
