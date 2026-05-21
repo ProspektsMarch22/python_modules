@@ -58,11 +58,11 @@ class TextProcessor(DataProcessor):
     def ingest(self, data: str | list[str]) -> None:
         if not self.validate(data):
             raise TypeError("Improper text data")
-        if (type(data) is list):
+        if type(data) is list:
             for item in data:
                 self._ingested.append((self._total_count, item))
                 self._total_count += 1
-        else:
+        elif type(data) is str:
             self._ingested.append((self._total_count, data))
             self._total_count += 1
 
@@ -80,16 +80,17 @@ class LogProcessor(DataProcessor):
                     and all(isinstance(k, str) for k in item.keys())
                     and all(isinstance(v, str) for v in item.values())
                     for item in data))
+        return False
 
-    def ingest(self, data: dict[str: str] | list[dict[str: str]]) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             raise TypeError("Improper log data")
-        if (type(data) is list):
+        if type(data) is list:
             for item in data:
                 self._ingested.append((self._total_count,
                                       ": ".join(v for v in item.values())))
                 self._total_count += 1
-        else:
+        elif type(data) is dict:
             self._ingested.append((self._total_count,
                                   ": ".join(v for v in data.values())))
             self._total_count += 1
@@ -103,11 +104,12 @@ def main() -> None:
     print(" Trying to validate input 'Hello':", num_proc.validate('Hello'))
     print(" Test invalid ingestion of string 'foo' without prior validation:")
     try:
+        # This raises an unavoidable mypy error
         num_proc.ingest('foo')
         print("Something went wrong :[")
     except TypeError as e:
         print("Got exception:", e)
-    data_num = [1, 2, 3, 4, 5]
+    data_num: list[int | float] = [1, 2, 3, 4, 5]
     print("Processing data:", data_num)
     num_proc.ingest(data_num)
     print("Extracting 3 values...")
@@ -116,7 +118,7 @@ def main() -> None:
     print("\nTesting Text Processor")
     txt_proc = TextProcessor()
     print(" Trying to validate input '42':", txt_proc.validate(42))
-    data_txt = ['Hello', 'Nexux', 'World']
+    data_txt: list[str] = ['Hello', 'Nexux', 'World']
     print("Processing data:", data_txt)
     txt_proc.ingest(data_txt)
     print("Extracting 1 value...")
@@ -124,14 +126,15 @@ def main() -> None:
     print("\nTesting Log Processor")
     log_proc = LogProcessor()
     print(" Trying to validate input 'Hello':", log_proc.validate('Hello'))
-    data_log = [{'log_level':'NOTICE', 'log_message':'Connection to Server'},
-                {'log_level':'ERROR', 'log_message':'Unauthorized Access!!' }]
+    data_log: list[dict[str, str]] = [
+        {'log_level': 'NOTICE', 'log_message': 'Connection to Server'},
+        {'log_level': 'ERROR', 'log_message': 'Unauthorized Access!!'}
+    ]
     print("Processing data: ", data_log)
     log_proc.ingest(data_log)
     print("Extracting 2 values...")
     for i in range(2):
         print(f"Log entry {i}:", log_proc.output())
-
 
 
 if __name__ == '__main__':
