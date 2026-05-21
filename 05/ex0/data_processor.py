@@ -104,8 +104,7 @@ def main() -> None:
     print(" Trying to validate input 'Hello':", num_proc.validate('Hello'))
     print(" Test invalid ingestion of string 'foo' without prior validation:")
     try:
-        # This raises an unavoidable mypy error
-        num_proc.ingest('foo')
+        num_proc.ingest('foo')  # This raises an unavoidable mypy error
         print("Something went wrong :[")
     except TypeError as e:
         print("Got exception:", e)
