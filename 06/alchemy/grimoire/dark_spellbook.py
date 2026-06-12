@@ -18,3 +18,4 @@ def dark_spell_record(spell_name: str, ingredients: str) -> str:
         return f"Spell not recorded: {spell_name} ({record})"
     elif "VALID" in record:
         return f"Spell recorded: {spell_name} ({record})"
+    return ""

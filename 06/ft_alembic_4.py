@@ -9,7 +9,10 @@ def main() -> None:
     print("Testing create_air:", alchemy.create_air())
     print("Now show that not all functions can be reached")
     print("THIS EXCEPTION IS SUPPOSED TO HAPPEN")
-    print("Testing the hidden create_earth:", alchemy.create_earth())
+    try:
+        print("Testing the hidden create_earth:", alchemy.create_earth())
+    except AttributeError as e:
+        print("The package is partially initialized:", e)
 
 
 if __name__ == '__main__':
