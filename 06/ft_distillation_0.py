@@ -2,6 +2,7 @@
 
 from alchemy.potions import healing_potion, strength_potion
 
+
 def main() -> None:
     print("=== Distillation 0 ===")
     print("Testing strength_potion:", strength_potion())

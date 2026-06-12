@@ -8,6 +8,7 @@ def light_spell_allowed_ingredients() -> list[str]:
         "water"
     ]
 
+
 def light_spell_record(spell_name: str, ingredients: str) -> str:
     from .light_validator import validate_ingredients
     record: str = validate_ingredients(ingredients)

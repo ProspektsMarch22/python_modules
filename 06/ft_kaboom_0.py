@@ -2,6 +2,7 @@
 
 import alchemy.grimoire as gr
 
+
 def main() -> None:
     print("=== Kaboom 0 ===")
     print("Using grimoire module directly")
