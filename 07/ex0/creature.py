@@ -46,16 +46,3 @@ class Torragon(Creature):
 
     def attack(self) -> str:
         return f'{self.name} uses Hydro Pump!'
-
-
-if __name__ == '__main__':
-    """ Testing suite for the creatures """
-    pocket_monsters: list[Creature] = [
-        Flameling(),
-        Pyrodon(),
-        Aquabub(),
-        Torragon()
-    ]
-    for mon in pocket_monsters:
-        print(mon.describe())
-        print(mon.attack())
