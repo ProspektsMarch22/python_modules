@@ -4,66 +4,48 @@ from abc import ABC, abstractmethod
 
 
 class Creature(ABC):
-    @property
-    @abstractmethod
-    def name(self):
-        pass
-
-    @property
-    @abstractmethod
-    def type(self):
-        pass
+    def __init__(self, name: str, type: str) -> None:
+        self.name = name
+        self.type = type
 
     @abstractmethod
-    def attack(self):
+    def attack(self) -> str:
         pass
 
     def describe(self) -> str:
-        return f'{self.name()} is a {self.type()} type Creature'
+        return f'{self.name} is a {self.type} type Creature'
 
 
 class Flameling(Creature):
-    def name(self) -> str:
-        return "Flameling"
-
-    def type(self) -> str:
-        return "Fire"
+    def __init__(self) -> None:
+        super().__init__('Flameling', 'Fire')
 
     def attack(self) -> str:
-        return f'{self.name()} uses Ember!'
+        return f'{self.name} uses Ember!'
 
 
 class Pyrodon(Creature):
-    def name(self) -> str:
-        return "Pyrodon"
-
-    def type(self) -> str:
-        return "Fire/Flying"
+    def __init__(self) -> None:
+        super().__init__('Pyrodon', 'Fire/Flying')
 
     def attack(self) -> str:
-        return f'{self.name()} uses Flamethrower!'
+        return f'{self.name} uses Flamethrower!'
 
 
 class Aquabub(Creature):
-    def name(self) -> str:
-        return "Aquabub"
-
-    def type(self) -> str:
-        return "Water"
+    def __init__(self) -> None:
+        super().__init__('Aquabub', 'Water')
 
     def attack(self) -> str:
-        return f'{self.name()} uses Water Gun!'
+        return f'{self.name} uses Water Gun!'
 
 
 class Torragon(Creature):
-    def name(self) -> str:
-        return "Torragon"
-
-    def type(self) -> str:
-        return "Water"
+    def __init__(self) -> None:
+        super().__init__('Torragon', 'Water')
 
     def attack(self) -> str:
-        return f'{self.name()} uses Hydro Pump!'
+        return f'{self.name} uses Hydro Pump!'
 
 
 if __name__ == '__main__':
