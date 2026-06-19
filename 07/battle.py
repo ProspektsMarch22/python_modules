@@ -28,8 +28,8 @@ def battle(factory1: FlameFactory | AquaFactory,
 
 
 if __name__ == "__main__":
-    magma: FlameFactory = FlameFactory()
-    aqua: AquaFactory = AquaFactory()
+    magma = FlameFactory()
+    aqua = AquaFactory()
     test_factory(magma)
     print()
     test_factory(aqua)

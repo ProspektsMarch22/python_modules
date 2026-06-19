@@ -4,9 +4,10 @@ from abc import ABC, abstractmethod
 
 
 class Creature(ABC):
-    def __init__(self, name: str, type: str) -> None:
+    def __init__(self, name: str, type: str, **kwargs) -> None:
         self.name = name
         self.type = type
+        super().__init__(**kwargs)
 
     @abstractmethod
     def attack(self) -> str:
