@@ -1,0 +1,20 @@
+# curl -ssl https://install.python-poetry.org | python3 -
+# poetry install
+# poetry run python3 loading.py
+
+# Poetry creates an isolated environment by itself
+
+
+[tool.poetry]
+name = "loading"
+version = "0.0.0"
+description = "Matrix-themed 42 exercise"
+authors = ["icezar-s"]
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "2.3.3"
+numpy = "1.26.4"
+matplotlib = "3.10.8"
+requests = "2.25.1"
