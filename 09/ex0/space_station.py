@@ -47,6 +47,8 @@ def report(station: SpaceStation_Model) -> None:
               f"Oxygen: {station.oxygen_level}%")
         status = "Operational" if station.is_operational else "Not operational"
         print(f"Status: {status}\n")
+        if station.notes:
+            print(f"Notes: '{station.notes}'")
     except Exception as e:
         print(f"ERROR ON REPORT(): {e}")
 
